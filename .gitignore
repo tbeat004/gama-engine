@@ -41,4 +41,7 @@
 *.dwo
 
 # VS Code
-*.vscode
+.vscode/
+
+# Builds
+build/
