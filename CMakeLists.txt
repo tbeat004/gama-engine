@@ -11,10 +11,18 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
 
 # Define source files
-set(SOURCE_FILES ${CMAKE_SOURCE_DIR}/src/main.cpp)
+set(SOURCE_FILES 
+    ${CMAKE_SOURCE_DIR}/src/main.cpp
+    ${CMAKE_SOURCE_DIR}/src/Window.cpp
+    ${CMAKE_SOURCE_DIR}/src/Shader.cpp
+    ${CMAKE_SOURCE_DIR}/src/Renderer.cpp
+)
 
 # Create executable
 add_executable(GamaEngine ${SOURCE_FILES})
+
+# Include directories
+target_include_directories(GamaEngine PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Link Dependencies
 target_link_libraries(GamaEngine PRIVATE glfw glad::glad)
