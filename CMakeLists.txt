@@ -1,13 +1,10 @@
 cmake_minimum_required(VERSION 3.14)
+project(GamaEngine)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-project(GamaEngine)
-
-
 
 # Find Dependencies
 find_package(glfw3 CONFIG REQUIRED)
@@ -21,3 +18,9 @@ add_executable(GamaEngine ${SOURCE_FILES})
 
 # Link Dependencies
 target_link_libraries(GamaEngine PRIVATE glfw glad::glad)
+
+# Copy shaders to the same directory as the executable
+add_custom_command(TARGET GamaEngine POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/src/shaders
+    $<TARGET_FILE_DIR:GamaEngine>/shaders)
