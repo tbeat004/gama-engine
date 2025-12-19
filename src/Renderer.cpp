@@ -23,13 +23,6 @@ void Renderer::setShader(Shader* shader) {
 }
 
 void Renderer::setupBuffers() {
-    float vertices[] = {
-        -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, // Top-left
-         0.5f,  0.5f, 0.0f, 1.0f, 0.0f, // Top-right
-         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, // Bottom-right
-        -0.5f, -0.5f, 1.0f, 1.0f, 1.0f  // Bottom-left
-    };
-
     GLuint elements[] = {
         0, 1, 2,
         2, 3, 0
@@ -39,10 +32,10 @@ void Renderer::setupBuffers() {
     glGenVertexArrays(1, &m_vao);
     glBindVertexArray(m_vao);
 
-    // Generate and setup VBO
+    // Generate VBO (empty for now, will be filled per entity)
     glGenBuffers(1, &m_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 20, nullptr, GL_DYNAMIC_DRAW);  // 4 vertices * 5 floats each
 
     // Generate and setup EBO
     glGenBuffers(1, &m_ebo);
@@ -68,17 +61,39 @@ void Renderer::setupVertexAttributes() {
         glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
         glEnableVertexAttribArray(colorAttrib);
     }
-
-    // Set uniform if it exists
-    GLint uniColor = m_shader->getUniformLocation("triangleColor");
-    if (uniColor != -1) {
-        glUniform3f(uniColor, 1.0f, 0.0f, 0.0f);
-    }
 }
 
-void Renderer::draw() {
+void Renderer::updateVertexData(const Entity& entity) {
+    // Calculate entity corners based on position and size
+    float halfWidth = entity.getWidth() / 2.0f;
+    float halfHeight = entity.getHeight() / 2.0f;
+    float x = entity.getX();
+    float y = entity.getY();
+    float r = entity.getR();
+    float g = entity.getG();
+    float b = entity.getB();
+
+    // Generate vertices for a quad centered at entity position
+    float vertices[] = {
+        // Position (x, y)       // Color (r, g, b)
+        x - halfWidth, y + halfHeight, r, g, b,  // Top-left
+        x + halfWidth, y + halfHeight, r, g, b,  // Top-right
+        x + halfWidth, y - halfHeight, r, g, b,  // Bottom-right
+        x - halfWidth, y - halfHeight, r, g, b   // Bottom-left
+    };
+
+    // Update VBO with new vertex data
+    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+}
+
+void Renderer::drawEntity(const Entity& entity) {
     if (!m_shader) return;
 
+    // Generate vertices from entity data
+    updateVertexData(entity);
+
+    // Draw
     m_shader->use();
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

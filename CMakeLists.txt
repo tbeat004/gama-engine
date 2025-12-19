@@ -16,6 +16,7 @@ set(SOURCE_FILES
     ${CMAKE_SOURCE_DIR}/src/Window.cpp
     ${CMAKE_SOURCE_DIR}/src/Shader.cpp
     ${CMAKE_SOURCE_DIR}/src/Renderer.cpp
+    ${CMAKE_SOURCE_DIR}/src/Entity.cpp
 )
 
 # Create executable

@@ -1,6 +1,8 @@
 #pragma once
 
+#include <glad/glad.h>
 #include "Shader.h"
+#include "Entity.h"
 
 class Renderer {
 public:
@@ -8,7 +10,7 @@ public:
     ~Renderer();
 
     void initialize();
-    void draw();
+    void drawEntity(const Entity& entity);
     void setShader(Shader* shader);
 
 private:
@@ -19,4 +21,5 @@ private:
 
     void setupBuffers();
     void setupVertexAttributes();
+    void updateVertexData(const Entity& entity);
 };

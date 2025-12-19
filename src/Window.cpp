@@ -1,5 +1,4 @@
 #include "Window.h"
-#include <glad/glad.h>
 #include <iostream>
 
 Window::Window(int width, int height, const std::string& title)
@@ -54,4 +53,13 @@ void Window::pollEvents() {
 
 void Window::swapBuffers() {
     glfwSwapBuffers(m_window);
+}
+
+void Window::swapInterval(int interval) {
+    glfwSwapInterval(interval);
+}
+
+void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
