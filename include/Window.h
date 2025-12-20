@@ -17,7 +17,7 @@ public:
     void swapInterval(int interval);
     void setEntity(Entity* entity) { m_entity = entity; }
     // Key_callback for input handling
-    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    // static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     GLFWwindow* getHandle() { return m_window; }
     Entity* getEntity() { return m_entity; }
 

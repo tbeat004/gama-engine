@@ -12,7 +12,7 @@ int main() {
         return -1;
     }
 
-    glfwSetKeyCallback(window.getHandle(), Window::key_callback);
+    // glfwSetKeyCallback(window.getHandle(), Window::key_callback);
 
     window.swapInterval(1);
 
