@@ -1,7 +1,7 @@
 #include "Entity.h"
 #include <iostream>
-Entity::Entity(float x, float y, float width, float height)
-    : m_x(x), m_y(y), m_width(width), m_height(height), m_r(1.0f), m_g(1.0f), m_b(1.0f) {
+Entity::Entity(float x, float y, float width, float height, float speed)
+    : m_x(x), m_y(y), m_width(width), m_height(height), m_r(1.0f), m_g(1.0f), m_b(1.0f), m_speed(speed) {
 }
 
 Entity::~Entity() {
@@ -27,4 +27,8 @@ void Entity::setColor(float r, float g, float b) {
     m_r = r;
     m_g = g;
     m_b = b;
+}
+
+void Entity::setSpeed(float speed) {
+    m_speed = speed;
 }

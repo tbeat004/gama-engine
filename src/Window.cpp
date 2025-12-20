@@ -40,6 +40,10 @@ bool Window::initialize() {
     // Set viewport
     glViewport(0, 0, m_width, m_height);
 
+    // Set user pointer and callbacks
+    glfwSetWindowUserPointer(m_window, this);
+    glfwSetKeyCallback(m_window, key_callback);
+
     return true;
 }
 
@@ -59,7 +63,19 @@ void Window::swapInterval(int interval) {
     glfwSwapInterval(interval);
 }
 
-void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+void Window::key_callback(GLFWwindow* glfwWindow, int key, int scancode, int action, int mods) {
+    Window* window = static_cast<Window*>(glfwGetWindowUserPointer(glfwWindow));
+    
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    glfwSetWindowShouldClose(window, GLFW_TRUE);
+        glfwSetWindowShouldClose(glfwWindow, GLFW_TRUE);
+
+    if (window->m_entity) {
+        if (key == GLFW_KEY_RIGHT && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+            window->m_entity->move(window->m_entity->getSpeed(), 0.0f);
+        }
+
+        if (key == GLFW_KEY_LEFT && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+            window->m_entity->move(-window->m_entity->getSpeed(), 0.0f);
+        }
+    }
 }

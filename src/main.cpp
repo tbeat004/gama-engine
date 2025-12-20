@@ -24,23 +24,13 @@ int main() {
     renderer.initialize();
     renderer.setShader(&shader);
 
-    // Create an entity at position (0, 0) with size 100x100 in red
-    Entity entity(0.0f, 0.0f, .2f, .2f);
+    float speed = 0.05f;
+    Entity entity(0.0f, 0.0f, .2f, .2f, speed);
     entity.setColor(1.0f, 0.0f, 0.0f);  // Red
-
-    // Variables for movement
-    float speed = 0.01f;
-    float direction = 1.0f;
+    window.setEntity(&entity);
 
     // Main game loop
     while (!window.shouldClose()) {
-        entity.move(speed * direction, 0.0f);
-        
-
-        if (entity.getX() > .5f || entity.getX() < -.5f) {
-            direction *= -1.0f;
-        }
-
 
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);

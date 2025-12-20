@@ -2,7 +2,7 @@
 
 class Entity {
 public:
-    Entity(float x = 0.0f, float y = 0.0f, float width = 50.0f, float height = 50.0f);
+    Entity(float x = 0.0f, float y = 0.0f, float width = 50.0f, float height = 50.0f, float speed = 0.1f);
     ~Entity();
 
     // Moves this entity by a relative amount from its current position
@@ -13,6 +13,8 @@ public:
     void setSize(float width, float height);
     // Sets the color of this entity
     void setColor(float r, float g, float b);
+    // Sets the speed of the entity
+    void setSpeed(float speed);
 
     // Getters
     float getX() const { return m_x; }
@@ -22,9 +24,11 @@ public:
     float getR() const { return m_r; }
     float getG() const { return m_g; }
     float getB() const { return m_b; }
+    float getSpeed() const { return m_speed; }
 
 private:
     float m_x, m_y;
     float m_width, m_height;
     float m_r, m_g, m_b;  // Color
+    float m_speed;
 };
