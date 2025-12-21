@@ -4,23 +4,27 @@
         {
             "name": "debug",
             "displayName": "Debug",
-            "description": "Debug build with Visual Studio 2022",
-            "generator": "Visual Studio 17 2022",
-            "binaryDir": "${sourceDir}/build",
+            "description": "Debug build with Clang (cross-platform)",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/debug",
             "cacheVariables": {
-                "CMAKE_TOOLCHAIN_FILE": "C:/Users/toddb/dev/tools/vcpkg/scripts/buildsystems/vcpkg.cmake",
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
             }
         },
         {
             "name": "release",
             "displayName": "Release",
-            "description": "Release build with Visual Studio 2022",
-            "generator": "Visual Studio 17 2022",
-            "binaryDir": "${sourceDir}/build",
+            "description": "Release build with Clang (cross-platform)",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/release",
             "cacheVariables": {
-                "CMAKE_TOOLCHAIN_FILE": "C:/Users/toddb/dev/tools/vcpkg/scripts/buildsystems/vcpkg.cmake",
-                "CMAKE_BUILD_TYPE": "Release"
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
             }
         }
     ],

@@ -1,5 +1,6 @@
 @echo off
-cmake --build build --config Debug
-cd build\Debug
+cmake --preset debug
+cmake --build --preset debug
+cd build\debug
 GamaEngine.exe
 cd ..\..
