@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Find Dependencies
-find_package(glfw3 3.4 CONFIG REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
 
 # Define source files
