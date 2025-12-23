@@ -4,8 +4,14 @@
 #include "Shader.h"
 #include "Renderer.h"
 #include "Entity.h"
+#include "LuaTest.h"
 
 int main() {
+    // Test Lua integration
+    std::cout << "=== Testing Lua Integration ===" << std::endl;
+    testLuaIntegration();
+    std::cout << "=== Lua Test Complete ===" << std::endl << std::endl;
+    
     // Initialize window
     Window window(800, 600, "GamaEngine");
     if (!window.initialize()) {
