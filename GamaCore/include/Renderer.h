@@ -10,6 +10,7 @@ public:
     ~Renderer();
 
     void initialize();
+    void clear();
     void drawEntity(const Entity& entity);
     void setShader(Shader* shader);
 

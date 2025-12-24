@@ -14,6 +14,10 @@ void Renderer::initialize() {
     setupBuffers();
 }
 
+void Renderer::clear() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 void Renderer::setShader(Shader* shader) {
     m_shader = shader;
     if (m_shader) {

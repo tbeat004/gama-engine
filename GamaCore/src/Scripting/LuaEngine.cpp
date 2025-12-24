@@ -1,3 +1,4 @@
+#include "LuaEngine.h"
 #include <sol/sol.hpp>
 #include <iostream>
 
